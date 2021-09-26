@@ -1,4 +1,11 @@
-from .config import url_channel
+
+from selenium import webdriver
+import time
+import random
+import unicodedata
+import re
+from my_configs import url_channel
+
 options = webdriver.ChromeOptions()
 prefs = {"profile.managed_default_content_settings.images": 2}
 options.add_experimental_option("prefs", prefs)
@@ -14,7 +21,7 @@ for i in range(1, 14):
     driver.execute_script("window.scrollBy(0,{})".format(len_scroll))
     len_scroll += 6000
     time.sleep(1)
-    print('прокрутка')
+    print('scroll')
 for i in driver.find_elements_by_id('video-title'):
     vid_link = str(i.get_attribute('href'))
     vid_description = str(i.get_attribute('aria-label'))
@@ -35,11 +42,11 @@ for i in driver.find_elements_by_id('video-title'):
 
     vids = ('1', author_date, vid_description, prosm_int, '0', vid_link)
     print(vids)
-    try:
-        cur.execute("INSERT INTO vidos VALUES(?, ?, ?, ?, ?, ?);", vids)
-        conn.commit()
-    except sqlite3.IntegrityError as err:
-        print(str(err) + 'в ссылке: ' + link)
+    # try:
+    #     cur.execute("INSERT INTO vidos VALUES(?, ?, ?, ?, ?, ?);", vids)
+    #     conn.commit()
+    # except sqlite3.IntegrityError as err:
+    #     print(str(err) + 'в ссылке: ' + link)
 driver.close()
 
 
