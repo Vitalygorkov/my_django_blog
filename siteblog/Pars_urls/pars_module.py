@@ -13,7 +13,7 @@ driver = webdriver.Chrome('chromedriver.exe', options=options)
 
 
 
-
+# --collecting a list of links to videos.you need to add an entry to the list and save to a file
 driver.get(url_channel)
 time.sleep(1)
 len_scroll = 3000
@@ -48,6 +48,8 @@ for i in driver.find_elements_by_id('video-title'):
     # except sqlite3.IntegrityError as err:
     #     print(str(err) + 'в ссылке: ' + link)
 driver.close()
+# --collecting a list of links to videos.you need to add an entry to the list and save to a file
+
 
 
 #
