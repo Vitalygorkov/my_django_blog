@@ -1,0 +1,15 @@
+<form method="post">
+    {% csrf_token %}
+    Текущая температура: {{ form.value }}
+    <input type="submit" value="OK">
+    <span>{{ error }}</span>
+</form>
+{% if latest_temp_list %}
+    <ul>
+    {% for temp in latest_temp_list %}
+        <li>{{ temp.temp_date }}:  {{ temp.value }} град.</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No temps are available.</p>
+{% endif %}
